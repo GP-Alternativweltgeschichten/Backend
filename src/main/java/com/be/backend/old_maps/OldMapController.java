@@ -16,22 +16,22 @@ public class OldMapController {
 
     @GetMapping("/")
     public ResponseEntity<List<OldMapDTO>> getAllOldMaps() {
-        return ResponseEntity.ok(oldMapService.getAllOldMaps());
+        return ResponseEntity.ok(oldMapService.getAllOldMaps().stream().map(OldMapMapper::toDTO).toList());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<OldMapDTO> getOldMapById(@PathVariable Integer id) {
-        return ResponseEntity.ok(oldMapService.getOldMapById(id));
+        return ResponseEntity.ok(OldMapMapper.toDTO(oldMapService.getOldMapById(id)));
     }
 
     @PostMapping("/")
-    public ResponseEntity<OldMapDTO> saveOldMap(@RequestBody OldMapDTO oldMap) {
-        return ResponseEntity.ok(oldMapService.saveOldMap(oldMap));
+    public ResponseEntity<OldMapDTO> saveOldMap(@RequestBody OldMap oldMap) {
+        return ResponseEntity.ok(OldMapMapper.toDTO(oldMapService.saveOldMap(oldMap)));
     }
 
     @PutMapping("/")
-    public ResponseEntity<OldMapDTO> updateOldMap(@RequestBody OldMapDTO oldMap) {
-        return ResponseEntity.ok(oldMapService.updateOldMap(oldMap));
+    public ResponseEntity<OldMapDTO> updateOldMap(@RequestBody OldMap oldMap) {
+        return ResponseEntity.ok(OldMapMapper.toDTO(oldMapService.updateOldMap(oldMap)));
     }
 
     @DeleteMapping("/{id}")

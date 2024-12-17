@@ -1,21 +1,19 @@
 package com.be.backend.scenario;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@NoArgsConstructor
+@AllArgsConstructor
 @Getter
-@Setter
+@Value
 public class ScenarioDTO implements Comparable<ScenarioDTO> {
-    private Integer id;
-    private String name;
-    private String description;
-    private byte[] image;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    Integer id;
+    String name;
+    String description;
+    byte[] image;
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt;
 
     public ScenarioDTO(
             final Scenario entity

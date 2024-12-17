@@ -1,21 +1,21 @@
 package com.be.backend.old_maps;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Value;
 
 import java.time.LocalDateTime;
 
-@NoArgsConstructor
+@AllArgsConstructor
 @Getter
-@Setter
+@Value
 public class OldMapDTO implements Comparable<OldMapDTO> {
-    private Integer id;
-    private String name;
-    private String description;
-    private byte[] image;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    Integer id;
+    String name;
+    String description;
+    byte[] image;
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt;
 
     public OldMapDTO(
             final OldMap entity

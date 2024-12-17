@@ -14,12 +14,12 @@ import java.util.Optional;
 public class OldMapService {
     private final OldMapRepo oldMapRepo;
 
-    public List<OldMapDTO> getAllOldMaps() {
+    public List<OldMap> getAllOldMaps() {
         return oldMapRepo.findAll();
     }
 
-    public OldMapDTO getOldMapById(Integer id) {
-        Optional<OldMapDTO> optionalOldMap = oldMapRepo.findById(id);
+    public OldMap getOldMapById(Integer id) {
+        Optional<OldMap> optionalOldMap = oldMapRepo.findById(id);
         if (optionalOldMap.isPresent()) {
             return optionalOldMap.get();
         }
@@ -27,21 +27,21 @@ public class OldMapService {
         return null;
     }
 
-    public OldMapDTO saveOldMap(OldMapDTO oldMap) {
+    public OldMap saveOldMap(OldMap oldMap) {
         oldMap.setCreatedAt(LocalDateTime.now());
         oldMap.setUpdatedAt(LocalDateTime.now());
-        OldMapDTO savedOldMap = oldMapRepo.save(oldMap);
+        OldMap savedOldMap = oldMapRepo.save(oldMap);
 
         log.info("OldMap with id {} saved", savedOldMap.getId());
         return savedOldMap;
     }
 
-    public OldMapDTO updateOldMap(OldMapDTO oldMap) {
-        Optional<OldMapDTO> existingOldMap = oldMapRepo.findById(oldMap.getId());
+    public OldMap updateOldMap(OldMap oldMap) {
+        Optional<OldMap> existingOldMap = oldMapRepo.findById(oldMap.getId());
         oldMap.setCreatedAt(existingOldMap.get().getCreatedAt());
         oldMap.setUpdatedAt(LocalDateTime.now());
 
-        OldMapDTO updatedOldMap = oldMapRepo.save(oldMap);
+        OldMap updatedOldMap = oldMapRepo.save(oldMap);
 
         log.info("OldMap with id {} updated", updatedOldMap.getId());
         return updatedOldMap;

@@ -16,22 +16,22 @@ public class ScenarioController {
 
     @GetMapping("/")
     public ResponseEntity<List<ScenarioDTO>> getAllScenarios() {
-        return ResponseEntity.ok(scenarioService.getAllScenarios());
+        return ResponseEntity.ok(scenarioService.getAllScenarios().stream().map(ScenarioMapper::toDTO).toList());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ScenarioDTO> getScenarioById(@PathVariable Integer id) {
-        return ResponseEntity.ok(scenarioService.getScenarioById(id));
+        return ResponseEntity.ok(ScenarioMapper.toDTO(scenarioService.getScenarioById(id)));
     }
 
     @PostMapping("/")
-    public ResponseEntity<ScenarioDTO> saveScenario(@RequestBody ScenarioDTO scenario) {
-        return ResponseEntity.ok(scenarioService.saveScenario(scenario));
+    public ResponseEntity<ScenarioDTO> saveScenario(@RequestBody Scenario scenario) {
+        return ResponseEntity.ok(ScenarioMapper.toDTO(scenarioService.saveScenario(scenario)));
     }
 
     @PutMapping("/")
-    public ResponseEntity<ScenarioDTO> updateScenario(@RequestBody ScenarioDTO scenario) {
-        return ResponseEntity.ok(scenarioService.updateScenario(scenario));
+    public ResponseEntity<ScenarioDTO> updateScenario(@RequestBody Scenario scenario) {
+        return ResponseEntity.ok(ScenarioMapper.toDTO(scenarioService.updateScenario(scenario)));
     }
 
     @DeleteMapping("/{id}")

@@ -14,12 +14,12 @@ import java.util.Optional;
 public class ScenarioService {
     private final ScenarioRepo scenarioRepo;
 
-    public List<ScenarioDTO> getAllScenarios() {
+    public List<Scenario> getAllScenarios() {
         return scenarioRepo.findAll();
     }
 
-    public ScenarioDTO getScenarioById(Integer id) {
-        Optional<ScenarioDTO> optionalScenario = scenarioRepo.findById(id);
+    public Scenario getScenarioById(Integer id) {
+        Optional<Scenario> optionalScenario = scenarioRepo.findById(id);
         if (optionalScenario.isPresent()) {
             return optionalScenario.get();
         }
@@ -27,21 +27,21 @@ public class ScenarioService {
         return null;
     }
 
-    public ScenarioDTO saveScenario(ScenarioDTO scenario) {
+    public Scenario saveScenario(Scenario scenario) {
         scenario.setCreatedAt(LocalDateTime.now());
         scenario.setUpdatedAt(LocalDateTime.now());
-        ScenarioDTO savedScenario = scenarioRepo.save(scenario);
+        Scenario savedScenario = scenarioRepo.save(scenario);
 
         log.info("Scenario with id {} saved", savedScenario.getId());
         return savedScenario;
     }
 
-    public ScenarioDTO updateScenario(ScenarioDTO scenario) {
-        Optional<ScenarioDTO> existingScenario = scenarioRepo.findById(scenario.getId());
+    public Scenario updateScenario(Scenario scenario) {
+        Optional<Scenario> existingScenario = scenarioRepo.findById(scenario.getId());
         scenario.setCreatedAt(existingScenario.get().getCreatedAt());
         scenario.setUpdatedAt(LocalDateTime.now());
 
-        ScenarioDTO updatedScenario = scenarioRepo.save(scenario);
+        Scenario updatedScenario = scenarioRepo.save(scenario);
 
         log.info("Scenario with id {} updated", updatedScenario.getId());
         return updatedScenario;
