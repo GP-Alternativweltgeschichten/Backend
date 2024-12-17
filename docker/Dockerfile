@@ -13,7 +13,7 @@ ENV POSTGRES_DB=db
 WORKDIR /docker-entrypoint-initdb.d
 
 # Dump in den Container kopieren
-COPY init-db.sh tables.sql ./
+COPY init-db.sh init.sql ./
 
 # Skript ausführbar machen
 RUN chmod +x init-db.sh && dos2unix init-db.sh
