@@ -14,7 +14,7 @@ import java.util.List;
 public class OldMapController {
     private final OldMapService oldMapService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<List<OldMapDTO>> getAllOldMaps() {
         return ResponseEntity.ok(oldMapService.getAllOldMaps().stream().map(OldMapMapper::toDTO).toList());
     }
@@ -24,12 +24,12 @@ public class OldMapController {
         return ResponseEntity.ok(OldMapMapper.toDTO(oldMapService.getOldMapById(id)));
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<OldMapDTO> saveOldMap(@RequestBody OldMap oldMap) {
         return ResponseEntity.ok(OldMapMapper.toDTO(oldMapService.saveOldMap(oldMap)));
     }
 
-    @PutMapping("/")
+    @PutMapping("")
     public ResponseEntity<OldMapDTO> updateOldMap(@RequestBody OldMap oldMap) {
         return ResponseEntity.ok(OldMapMapper.toDTO(oldMapService.updateOldMap(oldMap)));
     }

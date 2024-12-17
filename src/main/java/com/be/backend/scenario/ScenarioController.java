@@ -14,7 +14,7 @@ import java.util.List;
 public class ScenarioController {
     private final ScenarioService scenarioService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<List<ScenarioDTO>> getAllScenarios() {
         return ResponseEntity.ok(scenarioService.getAllScenarios().stream().map(ScenarioMapper::toDTO).toList());
     }
@@ -24,12 +24,12 @@ public class ScenarioController {
         return ResponseEntity.ok(ScenarioMapper.toDTO(scenarioService.getScenarioById(id)));
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<ScenarioDTO> saveScenario(@RequestBody Scenario scenario) {
         return ResponseEntity.ok(ScenarioMapper.toDTO(scenarioService.saveScenario(scenario)));
     }
 
-    @PutMapping("/")
+    @PutMapping("")
     public ResponseEntity<ScenarioDTO> updateScenario(@RequestBody Scenario scenario) {
         return ResponseEntity.ok(ScenarioMapper.toDTO(scenarioService.updateScenario(scenario)));
     }
