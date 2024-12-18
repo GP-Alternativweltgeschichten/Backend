@@ -1,33 +1,35 @@
-package com.be.backend.old_maps;
+package com.be.backend.maps;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Value;
-import java.util.Date;
+
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @Getter
 @Value
-public class OldMapDTO implements Comparable<OldMapDTO> {
+public class MapDTO implements Comparable<MapDTO> {
     Integer id;
-    Integer mapid;
-    String DateOfMap;
+    String name;
+    byte[] image;
+    boolean visible;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
 
-    public OldMapDTO(
-            final OldMap entity
+    public MapDTO(
+            final Map entity
     ) {
         this.id = entity.getId();
-        this.mapid = entity.getMapid();
-        this.DateOfMap = entity.getDateOfMap();
+        this.name = entity.getName();
+        this.image = entity.getImage();
+        this.visible = entity.isVisible();
         this.createdAt = entity.getCreatedAt();
         this.updatedAt = entity.getUpdatedAt();
     }
 
     @Override
-    public int compareTo(OldMapDTO o) {
+    public int compareTo(MapDTO o) {
         return this.id.compareTo(o.id);
     }
 }

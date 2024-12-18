@@ -11,7 +11,7 @@ public class ScenarioDTO implements Comparable<ScenarioDTO> {
     Integer id;
     String name;
     String description;
-    byte[] image;
+    Integer mapid;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
 
@@ -21,7 +21,7 @@ public class ScenarioDTO implements Comparable<ScenarioDTO> {
         this.id = entity.getId();
         this.name = entity.getName();
         this.description = entity.getDescription();
-        this.image = entity.getImage();
+        this.mapid = entity.getMapid();
         this.createdAt = entity.getCreatedAt();
         this.updatedAt = entity.getUpdatedAt();
     }

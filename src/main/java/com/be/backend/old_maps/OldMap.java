@@ -3,9 +3,7 @@ package com.be.backend.old_maps;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import org.hibernate.annotations.JdbcTypeCode;
 
-import java.sql.Types;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -19,17 +17,17 @@ public class OldMap {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "name", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "mapid", referencedColumnName = "id")
     @NotNull
-    private String name;
+    private Integer mapid;
+
+    @Column(name = "DateOfMap")
+    @NotNull
+    private String dateOfMap;
 
     @Column(name = "description")
     private String description;
-
-    @Column(name = "image")
-    @JdbcTypeCode(Types.VARBINARY)
-    @Lob
-    private byte[] image;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -39,16 +37,15 @@ public class OldMap {
 
     public OldMap(
             Integer id,
-            String name,
-            String description,
-            byte[] image,
+            Integer mapid,
+            String dateOfMap,
             LocalDateTime createdAt,
             LocalDateTime updatedAt
     ) {
         this.id = id;
-        this.name = name;
+        this.mapid = mapid;
+        this.dateOfMap = dateOfMap;
         this.description = description;
-        this.image = image;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
