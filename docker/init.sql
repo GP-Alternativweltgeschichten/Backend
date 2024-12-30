@@ -24,7 +24,7 @@ CREATE TABLE if not exists Scenarios
     updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE if not exists OldMaps
+CREATE TABLE if not exists Old_Maps
 (
     id         SERIAL PRIMARY KEY,
     MapID      INT NOT NULL,

@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 @Data
 @Entity
-@Table(name = "OldMaps")
+@Table(name = "Old_Maps")
 public class OldMap {
     @Id
     @Column(name = "id")
@@ -23,7 +23,7 @@ public class OldMap {
     @NotNull
     private Map map;
 
-    @Column(name = "DateOfMap")
+    @Column(name = "date_of_map")
     @NotNull
     private String dateOfMap;
 
