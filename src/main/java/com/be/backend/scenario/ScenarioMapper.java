@@ -6,7 +6,7 @@ public class ScenarioMapper {
                 entity.getId(),
                 entity.getName(),
                 entity.getDescription(),
-                entity.getMapid(),
+                entity.getMap(),
                 entity.getCreatedAt(),
                 entity.getUpdatedAt()
         );
@@ -16,7 +16,7 @@ public class ScenarioMapper {
         return new Scenario(
                 dto.getId(),
                 dto.getName(),
-                dto.getMapid(),
+                dto.getMap(),
                 dto.getDescription(),
                 dto.getCreatedAt(),
                 dto.getUpdatedAt()

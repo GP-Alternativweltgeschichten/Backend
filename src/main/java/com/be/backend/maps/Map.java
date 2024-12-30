@@ -1,5 +1,7 @@
 package com.be.backend.maps;
 
+import com.be.backend.old_maps.OldMap;
+import com.be.backend.scenario.Scenario;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -38,7 +40,10 @@ public class Map {
     private LocalDateTime updatedAt;
 
     @OneToOne(mappedBy = "map")
-    private Map map;
+    private Scenario scenario;
+
+    @OneToOne(mappedBy = "map")
+    private OldMap oldMap;
 
     public Map(
             Integer id,

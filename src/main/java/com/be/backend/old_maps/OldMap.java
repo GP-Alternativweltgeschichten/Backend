@@ -1,5 +1,6 @@
 package com.be.backend.old_maps;
 
+import com.be.backend.maps.Map;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -20,14 +21,11 @@ public class OldMap {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "mapid", referencedColumnName = "id")
     @NotNull
-    private Integer mapid;
+    private Map map;
 
     @Column(name = "DateOfMap")
     @NotNull
     private String dateOfMap;
-
-    @Column(name = "description")
-    private String description;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -37,15 +35,14 @@ public class OldMap {
 
     public OldMap(
             Integer id,
-            Integer mapid,
+            Map map,
             String dateOfMap,
             LocalDateTime createdAt,
             LocalDateTime updatedAt
     ) {
         this.id = id;
-        this.mapid = mapid;
+        this.map = map;
         this.dateOfMap = dateOfMap;
-        this.description = description;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }

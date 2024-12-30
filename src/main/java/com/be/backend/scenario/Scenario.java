@@ -1,11 +1,10 @@
 package com.be.backend.scenario;
 
+import com.be.backend.maps.Map;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import org.hibernate.annotations.JdbcTypeCode;
 
-import java.sql.Types;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -26,7 +25,7 @@ public class Scenario {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "mapid", referencedColumnName = "id")
     @NotNull
-    private Integer mapid;
+    private Map map;
 
     @Column(name = "description")
     private String description;
@@ -40,14 +39,14 @@ public class Scenario {
     public Scenario(
             Integer id,
             String name,
-            Integer mapd,
+            Map map,
             String description,
             LocalDateTime createdAt,
             LocalDateTime updatedAt
     ) {
         this.id = id;
         this.name = name;
-        this.mapid = mapid;
+        this.map = map;
         this.description = description;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
