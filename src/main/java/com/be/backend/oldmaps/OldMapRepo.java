@@ -1,4 +1,4 @@
-package com.be.backend.old_maps;
+package com.be.backend.oldmaps;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

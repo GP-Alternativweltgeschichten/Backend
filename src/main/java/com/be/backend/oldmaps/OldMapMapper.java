@@ -1,4 +1,4 @@
-package com.be.backend.old_maps;
+package com.be.backend.oldmaps;
 
 public class OldMapMapper {
     public static OldMapDTO toDTO(OldMap entity) {

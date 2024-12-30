@@ -1,4 +1,4 @@
-package com.be.backend.old_maps;
+package com.be.backend.oldmaps;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/old_maps")
+@RequestMapping("/oldmaps")
 @RequiredArgsConstructor
 @Validated
 public class OldMapController {

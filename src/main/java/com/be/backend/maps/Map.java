@@ -1,6 +1,6 @@
 package com.be.backend.maps;
 
-import com.be.backend.old_maps.OldMap;
+import com.be.backend.oldmaps.OldMap;
 import com.be.backend.scenario.Scenario;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

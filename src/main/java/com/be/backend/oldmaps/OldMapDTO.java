@@ -1,4 +1,4 @@
-package com.be.backend.old_maps;
+package com.be.backend.oldmaps;
 
 import com.be.backend.maps.Map;
 import lombok.AllArgsConstructor;

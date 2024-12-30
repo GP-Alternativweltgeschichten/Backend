@@ -1,4 +1,4 @@
-package com.be.backend.old_maps;
+package com.be.backend.oldmaps;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
