@@ -1,0 +1,19 @@
+package com.be.backend.prompting;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/prompting")
+@RequiredArgsConstructor
+@Validated
+public class PromptingController {
+    private final PromptingService promptingService;
+
+    @PostMapping("/text")
+    public ResponseEntity<String> getText(@RequestBody String text) {
+        return ResponseEntity.ok(promptingService.getText(text));
+    }
+}
