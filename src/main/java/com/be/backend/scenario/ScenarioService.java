@@ -38,13 +38,17 @@ public class ScenarioService {
 
     public Scenario updateScenario(Scenario scenario) {
         Optional<Scenario> existingScenario = scenarioRepo.findById(scenario.getId());
-        scenario.setCreatedAt(existingScenario.get().getCreatedAt());
-        scenario.setUpdatedAt(LocalDateTime.now());
+        if (existingScenario.isPresent()) {
+            scenario.setCreatedAt(existingScenario.get().getCreatedAt());
+            scenario.setUpdatedAt(LocalDateTime.now());
 
-        Scenario updatedScenario = scenarioRepo.save(scenario);
+            Scenario updatedScenario = scenarioRepo.save(scenario);
 
-        log.info("Scenario with id {} updated", updatedScenario.getId());
-        return updatedScenario;
+            log.info("Scenario with id {} updated", updatedScenario.getId());
+            return updatedScenario;
+        }
+        log.info("Scenario with id {} not existent", scenario.getId());
+        return null;
     }
 
     public void deleteScenarioById(Integer id) {

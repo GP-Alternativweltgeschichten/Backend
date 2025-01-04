@@ -38,13 +38,17 @@ public class MapService {
 
     public Map updateMap(Map Map) {
         Optional<Map> existingMap = MapRepo.findById(Map.getId());
-        Map.setCreatedAt(existingMap.get().getCreatedAt());
-        Map.setUpdatedAt(LocalDateTime.now());
+        if (existingMap.isPresent()) {
+            Map.setCreatedAt(existingMap.get().getCreatedAt());
+            Map.setUpdatedAt(LocalDateTime.now());
 
-        Map updatedMap = MapRepo.save(Map);
+            Map updatedMap = MapRepo.save(Map);
 
-        log.info("Map with id {} updated", updatedMap.getId());
-        return updatedMap;
+            log.info("Map with id {} updated", updatedMap.getId());
+            return updatedMap;
+        }
+        log.info("Map with id {} not existent", Map.getId());
+        return null;
     }
 
     public void deleteMapById(Integer id) {
