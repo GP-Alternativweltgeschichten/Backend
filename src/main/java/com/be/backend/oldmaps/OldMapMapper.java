@@ -4,8 +4,11 @@ public class OldMapMapper {
     public static OldMapDTO toDTO(OldMap entity) {
         return new OldMapDTO(
                 entity.getId(),
-                entity.getMap(),
+                entity.getName(),
+                entity.getImage(),
                 entity.getDateOfMap(),
+                entity.isEditable(),
+                entity.isVisible(),
                 entity.getCreatedAt(),
                 entity.getUpdatedAt()
         );
@@ -14,8 +17,11 @@ public class OldMapMapper {
     public static OldMap toEntity(OldMapDTO dto) {
         return new OldMap(
                 dto.getId(),
-                dto.getMap(),
+                dto.getName(),
+                dto.getImage(),
                 dto.getDateOfMap(),
+                dto.isEditable(),
+                dto.isVisible(),
                 dto.getCreatedAt(),
                 dto.getUpdatedAt()
         );

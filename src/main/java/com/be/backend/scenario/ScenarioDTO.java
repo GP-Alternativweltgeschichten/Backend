@@ -1,6 +1,5 @@
 package com.be.backend.scenario;
 
-import com.be.backend.maps.Map;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -11,8 +10,10 @@ import java.time.LocalDateTime;
 public class ScenarioDTO implements Comparable<ScenarioDTO> {
     Integer id;
     String name;
+    byte[] image;
     String description;
-    Map map;
+    boolean editable;
+    boolean visible;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
 
@@ -21,8 +22,10 @@ public class ScenarioDTO implements Comparable<ScenarioDTO> {
     ) {
         this.id = entity.getId();
         this.name = entity.getName();
+        this.image = entity.getImage();
         this.description = entity.getDescription();
-        this.map = entity.getMap();
+        this.editable = entity.isEditable();
+        this.visible = entity.isVisible();
         this.createdAt = entity.getCreatedAt();
         this.updatedAt = entity.getUpdatedAt();
     }

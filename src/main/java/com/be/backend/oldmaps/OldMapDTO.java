@@ -1,10 +1,8 @@
 package com.be.backend.oldmaps;
 
-import com.be.backend.maps.Map;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Value;
-import java.util.Date;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -12,8 +10,11 @@ import java.time.LocalDateTime;
 @Value
 public class OldMapDTO implements Comparable<OldMapDTO> {
     Integer id;
-    Map map;
-    String DateOfMap;
+    String name;
+    byte[] image;
+    String dateOfMap;
+    boolean editable;
+    boolean visible;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
 
@@ -21,8 +22,11 @@ public class OldMapDTO implements Comparable<OldMapDTO> {
             final OldMap entity
     ) {
         this.id = entity.getId();
-        this.map = entity.getMap();
-        this.DateOfMap = entity.getDateOfMap();
+        this.name = entity.getName();
+        this.image = entity.getImage();
+        this.dateOfMap = entity.getDateOfMap();
+        this.editable = entity.isEditable();
+        this.visible = entity.isVisible();
         this.createdAt = entity.getCreatedAt();
         this.updatedAt = entity.getUpdatedAt();
     }

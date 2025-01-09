@@ -1,10 +1,11 @@
 package com.be.backend.scenario;
 
-import com.be.backend.maps.Map;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.hibernate.annotations.JdbcTypeCode;
 
+import java.sql.Types;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -12,23 +13,30 @@ import java.time.LocalDateTime;
 @Setter
 @Data
 @Entity
-@Table(name = "Scenarios")
+@Table(name = "Scenario")
 public class Scenario {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "name", nullable = false)
     @NotNull
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "mapid", referencedColumnName = "id")
-    @NotNull
-    private Map map;
+    @Column(name = "image")
+    @JdbcTypeCode(Types.VARBINARY)
+    @Lob
+    private byte[] image;
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "editable",  columnDefinition = "boolean default true")
+    private boolean editable;
+
+    @Column(name = "visible",  columnDefinition = "boolean default true")
+    private boolean visible;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -39,15 +47,19 @@ public class Scenario {
     public Scenario(
             Integer id,
             String name,
-            Map map,
+            byte[] image,
             String description,
+            boolean editable,
+            boolean visible,
             LocalDateTime createdAt,
             LocalDateTime updatedAt
     ) {
         this.id = id;
         this.name = name;
-        this.map = map;
+        this.image = image;
         this.description = description;
+        this.editable = editable;
+        this.visible = visible;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }

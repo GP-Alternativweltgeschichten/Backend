@@ -5,8 +5,10 @@ public class ScenarioMapper {
         return new ScenarioDTO(
                 entity.getId(),
                 entity.getName(),
+                entity.getImage(),
                 entity.getDescription(),
-                entity.getMap(),
+                entity.isEditable(),
+                entity.isVisible(),
                 entity.getCreatedAt(),
                 entity.getUpdatedAt()
         );
@@ -16,8 +18,10 @@ public class ScenarioMapper {
         return new Scenario(
                 dto.getId(),
                 dto.getName(),
-                dto.getMap(),
+                dto.getImage(),
                 dto.getDescription(),
+                dto.isEditable(),
+                dto.isVisible(),
                 dto.getCreatedAt(),
                 dto.getUpdatedAt()
         );
