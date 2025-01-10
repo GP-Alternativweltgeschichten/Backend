@@ -1,6 +1,8 @@
 package com.be.backend.oldmaps;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,15 @@ public class OldMapController {
     @GetMapping("/{id}")
     public ResponseEntity<OldMapDTO> getOldMapById(@PathVariable Integer id) {
         return ResponseEntity.ok(OldMapMapper.toDTO(oldMapService.getOldMapById(id)));
+    }
+
+    @GetMapping("/{id}/map")
+    public ResponseEntity<byte[]> getOldMapMapById(@PathVariable Integer id) {
+        OldMap oldMap = oldMapService.getOldMapById(id);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "oldmap; filename=\"" + oldMap.getName() + "\"")
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(oldMap.getImage());
     }
 
     @PostMapping("")
