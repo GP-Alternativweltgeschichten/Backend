@@ -1,6 +1,8 @@
 package com.be.backend.scenario;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,15 @@ public class ScenarioController {
     @GetMapping("/{id}")
     public ResponseEntity<ScenarioDTO> getScenarioById(@PathVariable Integer id) {
         return ResponseEntity.ok(ScenarioMapper.toDTO(scenarioService.getScenarioById(id)));
+    }
+
+    @GetMapping("/{id}/map")
+    public ResponseEntity<byte[]> getScenarioMapById(@PathVariable Integer id) {
+        Scenario scenario = scenarioService.getScenarioById(id);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "scenario; filename=\"" + scenario.getName() + "\"")
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(scenario.getImage());
     }
 
     @PostMapping("")
