@@ -29,7 +29,7 @@ public class OldMap {
     @Lob
     private byte[] image;
 
-    @Column(name = "dateOfMap")
+    @Column(name = "date_of_map")
     private String dateOfMap;
 
     @Column(name = "editable",  columnDefinition = "boolean default true")
