@@ -16,4 +16,9 @@ public class PromptingController {
     public ResponseEntity<byte[]> getImageFromText(@RequestBody String text) {
         return ResponseEntity.ok(promptingService.getImageFromText(text));
     }
+
+    @PostMapping("/inpainting")
+    public ResponseEntity<byte[]> getImageFromTextAndImageAndMask(@RequestBody PromptingDTO request) {
+        return ResponseEntity.ok(promptingService.getImageFromTextAndImageAndMask(request.text, request.image, request.mask));
+    }
 }

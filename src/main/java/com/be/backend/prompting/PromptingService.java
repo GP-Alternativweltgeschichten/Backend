@@ -3,10 +3,7 @@ package com.be.backend.prompting;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,6 +20,20 @@ public class PromptingService {
         HttpEntity<String> request = new HttpEntity<>(text, headers);
 
         ResponseEntity<byte[]> response = restTemplate.postForEntity(uri + "/text/", request, byte[].class);
+        return response.getBody();
+    }
+
+    public byte[] getImageFromTextAndImageAndMask(String text, String image, String mask) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String body = "{\"prompt\":\"" + text + "\",\"image\":\"" + image + "\",\"mask\":\"" + mask + "\"}";
+
+        HttpEntity<String> request = new HttpEntity<>(body, headers);
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<byte[]> response = restTemplate.exchange(
+                uri + "/inpainting/", HttpMethod.POST, request, byte[].class);
         return response.getBody();
     }
 }
