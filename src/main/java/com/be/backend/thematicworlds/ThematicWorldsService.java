@@ -23,16 +23,15 @@ public class ThematicWorldsService {
 
         List<Scenario> scenarios = scenarioRepo.findAllVisible();
         for (Scenario scenario : scenarios) {
-           thematicWorlds.add(new ThematicWorld(scenario.getId(), scenario.getName(), scenario.getDescription(), scenario.getImage(), scenario.isEditable()));
+           thematicWorlds.add(new ThematicWorld(scenario.getId(), scenario.getName(), scenario.getDescription(), scenario.getImage(), true, scenario.isEditable()));
         }
 
         List<OldMap> oldMaps = oldMapRepo.findAllVisible();
         for (OldMap oldMap : oldMaps) {
-            thematicWorlds.add(new ThematicWorld(oldMap.getId(), oldMap.getName(), oldMap.getDateOfMap(), oldMap.getImage(), oldMap.isEditable()));
+            thematicWorlds.add(new ThematicWorld(oldMap.getId(), oldMap.getName(), oldMap.getDateOfMap(), oldMap.getImage(), false, oldMap.isEditable()));
         }
 
-        thematicWorlds.sort(Comparator.comparing(ThematicWorld::getName));
-
+        //thematicWorlds.sort(Comparator.comparing(ThematicWorld::getName));
         return thematicWorlds;
     }
 }

@@ -12,6 +12,7 @@ public class ThematicWorld {
     String name;
     String description;
     byte[] image;
+    boolean isScenario;
     boolean editable;
 
     public ThematicWorld(
@@ -21,6 +22,7 @@ public class ThematicWorld {
         this.name = entity.getName();
         this.description = entity.getDescription();
         this.image = entity.getImage();
+        this.isScenario = entity.isScenario();
         this.editable = entity.isEditable();
     }
 }
