@@ -26,7 +26,6 @@ public class PromptingService {
     public byte[] getImageFromTextAndImageAndMask(String text, String image, String mask) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-
         String body = "{\"prompt\":\"" + text + "\",\"image\":\"" + image + "\",\"mask\":\"" + mask + "\"}";
 
         HttpEntity<String> request = new HttpEntity<>(body, headers);
