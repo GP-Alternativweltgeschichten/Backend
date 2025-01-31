@@ -18,7 +18,7 @@ CREATE TABLE Old_Map (
     id          SERIAL PRIMARY KEY,
     name        VARCHAR(255) NOT NULL,
     image       bytea,
-    dateOfMap   TEXT,
+    date_of_map TEXT,
     editable    BOOLEAN,
     visible     BOOLEAN,
     created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -32,6 +32,6 @@ VALUES
     ('ISEK Plan', pg_read_binary_file('/res/olpe_isek.png')::bytea,'Umsetzung des innerstädischen Entwicklungskonzepts', TRUE, TRUE),
     ('Überschwemmung', pg_read_binary_file('/res/olpe_uberflutet.png')::bytea,'Karte des überfluteten Gebiets von Olpe', TRUE, TRUE);
 
-INSERT INTO Old_Map (name, image, dateOfMap, editable, visible)
+INSERT INTO Old_Map (name, image, date_of_map, editable, visible)
 VALUES
     ('Olpe damals', pg_read_binary_file('/res/olpe_1987.jpeg')::bytea,'1987', FALSE, TRUE);
