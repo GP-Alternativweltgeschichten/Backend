@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PromptingDTO {
-    String text;
+    String prompt;
     String image;
     String mask;
 }
