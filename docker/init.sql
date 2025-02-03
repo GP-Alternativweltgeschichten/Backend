@@ -30,7 +30,8 @@ INSERT INTO Scenario (name, image, description, editable, visible)
 VALUES
     ('Olpe heute',pg_read_binary_file('/res/olpe_default.png')::bytea, 'Aktuelle Karte von Olpe', TRUE, TRUE),
     ('ISEK Plan', pg_read_binary_file('/res/olpe_isek.png')::bytea,'Umsetzung des innerstädischen Entwicklungskonzepts', TRUE, TRUE),
-    ('Überschwemmung', pg_read_binary_file('/res/olpe_uberflutet.png')::bytea,'Karte des überfluteten Gebiets von Olpe', TRUE, TRUE);
+    ('Überschwemmung', pg_read_binary_file('/res/olpe_uberflutet.png')::bytea,'Karte des überfluteten Gebiets von Olpe', TRUE, TRUE),
+    ('Autogerechte Stadt', pg_read_binary_file('/res/olpe_auto.png')::bytea,'Karte des autogerechten Gebiets von Olpe', TRUE, TRUE);
 
 INSERT INTO Old_Map (name, image, date_of_map, editable, visible)
 VALUES
