@@ -16,3 +16,9 @@ spring:
 management:
   endpoints:
     enabled-by-default: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /api-docs
