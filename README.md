@@ -98,7 +98,7 @@ docker-compose up --build
 
 For complete API documentation, visit Swagger UI:
 ```
-http://localhost:8080/swagger-ui/
+http://localhost:8080/swagger-ui/index.html#/
 ```
 
 ## ...
