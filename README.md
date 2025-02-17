@@ -1,32 +1,42 @@
-# Spring Boot Backend
+# 🌍 Spring Boot Backend
 
-## 📌 Project Overview
-A brief description of the project, what it does, and the technologies used.
+## 📌 Projekt Overview
+Dieses Projekt dient als Backend für die Anwendung Alternativweltgeschichten und bietet APIs zur Verwaltung historischer Karten, Szenarien und thematischer Welten. Zudem unterstützt es KI-basierte Bilderzeugung und Inpainting für historische Rekonstruktionen.
 
-## 🚀 Technologies Used
-- **Java** (Version: 11/17/21)
-- **Spring Boot** (Version: 2.x/3.x)
-- **Spring Data JPA**
-- **Hibernate**
-- **PostgreSQL/MySQL**
-- **Swagger for API Documentation**
-- **Docker**
+Das Backend basiert auf Spring Boot und folgt bewährten Methoden für die Entwicklung von RESTful APIs. Es integriert eine PostgreSQL-Datenbank, unterstützt Docker-Deployment und enthält eine Swagger UI zur API-Dokumentation.
 
-## ⚙️ Prerequisites
-Ensure you have the following installed:
-- [Java JDK](https://adoptopenjdk.net/) (Version 11+ recommended)
-- [Gradle](https://gradle.org/install/)
-- [Docker](https://www.docker.com/) for containerized deployment
+## 📖 Inhalt
+- [Verwendete Technologien](#verwendete-technologien)
+- [Voraussetzungen](#voraussetzungen)
+- [Installation und Setup](#installation-und-setup)
+- [API-Endpunkte](#api-endpunkte)
 
-## 📥 Installation & Setup
-### 1. Clone the Repository
+
+## 🚀 Verwendete Technologien
+Dieses Projekt nutzt folgende Technologien und Frameworks:
+- **Java** (Version: 11/17/21)– Haupt programmiersprache
+- **Spring Boot** (Version: 2.x/3.x) – Backend-Framework
+- **Spring Data JPA** – Datenbankzugriff
+- **Hibernate** – ORM für die Datenbankkommunikation
+- **PostgreSQL/MySQL** – Unterstützte Datenbanken
+- **Swagger for API Documentation** – API-Dokumentation
+- **Docker** – Containerisierte Bereitstellung
+
+## ⚙️ Voraussetzungen
+Vor dem Start des Projekts sollten folgende Programme installiert sein:
+- [Java JDK](https://adoptopenjdk.net/) (Version 11 oder höher)
+- [Gradle](https://gradle.org/install/) (zum Bauen des Projekts)
+- [Docker](https://www.docker.com/) (falls das Projekt mit Containern ausgeführt wird)
+
+## 📥 Installation und Setup
+### 1. Repository klonen
 ```sh
 git clone https://github.com/GP-Alternativweltgeschichten/Backend.git
 cd Backend
 ```
 
-### 2. Configure Environment Variables
-Modify `application.properties` and `application.yml` with the correct database and application settings.
+### 2. Umgebungsvariablen konfigurieren
+Datenbank- und Anwendungseinstellungen in application.properties und application.yml anpassen.
 
 `src/main/resources/application.properties`:
 ```properties
@@ -62,17 +72,18 @@ management:
     enabled-by-default: true
 ```
 
-### 3. Build & Run the Application
-#### Using Gradle:
+### 3. Anwendung bauen & starten
+#### Mit Gradle:
 ```sh
-gradle ...
+gradle build
+gradle bootRun
 ```
-#### Using Docker in docker folder:
+#### Mit Docker im docker folder:
 ```sh
 docker-compose up --build
 ```
 
-## 🛠 API Endpoints
+## 🛠 API Endpunkte
 ### Old Maps
 - `GET /oldmaps` - Get all old maps
 - `GET /oldmaps/{id}` - Get an old map by id
@@ -96,7 +107,8 @@ docker-compose up --build
 ### Thematic Worlds
 - `GET /thematicworlds` - Get all thematic worlds
 
-For complete API documentation, visit Swagger UI:
+Vollständige API-Dokumentation:
+Besuche die Swagger UI für interaktive API-Tests:
 ```
 http://localhost:8080/swagger-ui/index.html#/
 ```
