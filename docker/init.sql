@@ -33,6 +33,3 @@ VALUES
     ('Überschwemmung', pg_read_binary_file('/res/olpe_uberflutet.png')::bytea,'Karte des überfluteten Gebiets von Olpe', TRUE, TRUE),
     ('Autogerechte Stadt', pg_read_binary_file('/res/olpe_auto.png')::bytea,'Karte des autogerechten Gebiets von Olpe', TRUE, TRUE);
 
-INSERT INTO Old_Map (name, image, date_of_map, editable, visible)
-VALUES
-    ('Olpe damals', pg_read_binary_file('/res/olpe_1987.jpeg')::bytea,'1987', FALSE, TRUE);
