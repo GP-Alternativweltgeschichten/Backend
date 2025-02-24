@@ -21,4 +21,15 @@ public class PromptingController {
     public ResponseEntity<byte[]> getImageFromTextAndImageAndMask(@RequestBody PromptingDTO request) {
         return ResponseEntity.ok(promptingService.getImageFromTextAndImageAndMaskAndRealism(request.prompt, request.image, request.mask, request.realism));
     }
+
+    @GetMapping("/aiModel")
+    public ResponseEntity<Number> getAiModel() {
+        return ResponseEntity.ok(promptingService.getAiModel());
+    }
+
+    @PostMapping("/aiModel")
+    public ResponseEntity<Void> setAiModel(@RequestBody Number aiModel) {
+        promptingService.setAiModel(aiModel);
+        return ResponseEntity.ok().build();
+    }
 }

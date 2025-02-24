@@ -14,6 +14,10 @@ public class PromptingService {
     final String uri = "http://127.0.0.1:8000";
     RestTemplate restTemplate = new RestTemplate();
 
+//    0 = OlpeAI
+//    1 = ChatGPT
+    public Number aiModel = 0;
+
     public byte[] getImageFromText(String text) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -34,5 +38,14 @@ public class PromptingService {
         ResponseEntity<byte[]> response = restTemplate.exchange(
                 uri + "/inpainting/", HttpMethod.POST, request, byte[].class);
         return response.getBody();
+    }
+
+    public Number getAiModel() {
+        return aiModel;
+    }
+
+    public void setAiModel(Number aiModel) {
+        this.aiModel = aiModel;
+        System.out.println("AI Model set to " + aiModel);
     }
 }
