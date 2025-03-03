@@ -11,5 +11,6 @@ public class PromptingDTO {
     String prompt;
     String image;
     String mask;
-    int realism;
+    int model;
+    int guidanceScale;
 }

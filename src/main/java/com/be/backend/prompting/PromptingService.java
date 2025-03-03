@@ -27,10 +27,10 @@ public class PromptingService {
         return response.getBody();
     }
 
-    public byte[] getImageFromTextAndImageAndMaskAndRealism(String text, String image, String mask, int realism) {
+    public byte[] getImageFromInpaintInformation(String text, String image, String mask, int model, int guidanceScale) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        String body = "{\"prompt\":\"" + text + "\",\"image\":\"" + image + "\",\"mask\":\"" + mask + "\",\"realism\":\"" + realism + "\"}";
+        String body = "{\"prompt\":\"" + text + "\",\"image\":\"" + image + "\",\"mask\":\"" + mask + "\",\"model\":\"" + model + "\",\"guidance_scale\":\"" + guidanceScale + "\"}";
 
         HttpEntity<String> request = new HttpEntity<>(body, headers);
 
