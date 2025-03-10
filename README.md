@@ -6,12 +6,12 @@ Dieses Projekt dient als Backend für die Anwendung Alternativweltgeschichten un
 Das Backend basiert auf Spring Boot und folgt bewährten Methoden für die Entwicklung von RESTful APIs. Es integriert eine PostgreSQL-Datenbank, unterstützt Docker-Deployment und enthält eine Swagger UI zur API-Dokumentation.
 
 ## 📖 Inhalt
-- [Verwendete Technologien](#verwendete-technologien)
-- [Voraussetzungen](#voraussetzungen)
-- [Installation und Setup](#installation-und-setup)
-- [API-Endpunkte](#api-endpunkte)
-- [Datenstruktur](#datenstruktur)
-- [Projektstruktur](#projektstruktur)
+- [Verwendete Technologien](#-verwendete-technologien)
+- [Voraussetzungen](#-voraussetzungen)
+- [Installation und Setup](#-installation-und-setup)
+- [API-Endpunkte](#-api-endpunkte)
+- [Datenstruktur](#-datenstruktur)
+- [Projektstruktur](#-projektstruktur)
 
 ## 🚀 Verwendete Technologien
 Dieses Projekt nutzt folgende Technologien und Frameworks:
@@ -93,11 +93,11 @@ docker-compose up --build
 - `PUT /oldmaps` - Eine alte Karte bearbeiten
 - `DELETE /oldmaps/{id}` - Eine alte Karte anhand der ID löschen
 
-### Propmting
+### Prompting
 - `POST /prompting/text` - Ein neues Bild aus Text generieren
 - `POST /prompting/inpainting` - Ein neues Bild per Inpainting generieren
 
-### Sceanrios
+### Scenarios
 - `GET /scenarios` - Alle Szenarien abrufen
 - `GET /scenarios/{id}` - Ein Szenario anhand der ID abrufen
 - `GET /scenarios/{id}/map` - Die Karte zu einem Szenario abrufen
@@ -170,7 +170,7 @@ Das Projekt ist in folgende Domänenpakete unterteilt:
 - prompting: Verarbeitung von Texteingaben zur Bildgenerierung
 - thematicworlds: Verwaltung von thematischen Welten
 Jedes Paket enthält spezifische Komponenten, um den Clean Architecture-Ansatz und die Schichtenarchitektur (Layered Architecture) umzusetzen.
-### Aufbau dder Schichten
+### Aufbau der Schichten
 Für jede Domäne (oldmaps, scenario, prompting, thematicworlds) sind die folgenden Schichten implementiert:
 
 **Entity** (OldMap, Scenario, ThematicWorld)
