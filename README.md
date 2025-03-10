@@ -7,10 +7,10 @@ Das Backend basiert auf Spring Boot und folgt bewährten Methoden für die Entwi
 
 ## 📖 Inhalt
 - [Verwendete Technologien](#-verwendete-technologien)
-- [Voraussetzungen](#-voraussetzungen)
+- [Voraussetzungen](#%EF%B8%8F-voraussetzungen)
 - [Installation und Setup](#-installation-und-setup)
 - [API-Endpunkte](#-api-endpunkte)
-- [Datenstruktur](#-datenstruktur)
+- [Datenstruktur](#%EF%B8%8F-datenstruktur)
 - [Projektstruktur](#-projektstruktur)
 
 ## 🚀 Verwendete Technologien
