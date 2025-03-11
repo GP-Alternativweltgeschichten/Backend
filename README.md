@@ -1,7 +1,7 @@
 # 🌍 Spring Boot Backend
 
-## 📌 Projektbeschreibung
-Dieses Projekt dient als Backend für die Anwendung Alternativweltgeschichten und bietet APIs zur Verwaltung historischer Karten, Szenarien und thematischer Welten. Zudem unterstützt es KI-basierte Bilderzeugung und Inpainting für historische Rekonstruktionen.
+## 📌 Beschreibung
+Dieses Anwendung dient als Backend für das Projekt Alternativweltgeschichten und bietet APIs zur Verwaltung historischer Karten, Szenarien und thematischer Welten. Zudem unterstützt es KI-basierte Bilderzeugung und Inpainting für historische Rekonstruktionen.
 
 Das Backend basiert auf Spring Boot und folgt bewährten Methoden für die Entwicklung von RESTful APIs. Es integriert eine PostgreSQL-Datenbank, unterstützt Docker-Deployment und enthält eine Swagger UI zur API-Dokumentation.
 
