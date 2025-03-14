@@ -15,7 +15,7 @@ Ziel dieser Anwendung ist es, eine zuverlässige, wartbare und erweiterbare Plat
 
 ## 🚀 Verwendete Technologien
 Dieses Projekt nutzt folgende Technologien und Frameworks:
-- **Java** (Version: 17) – Haupt programmiersprache
+- **Java** (Version: 17) – (Haupt)-Programmiersprache
 - **Spring Boot** (Version: 3.4) – Backend-Framework
 - **Spring Data JPA** – Datenbankzugriff
 - **Hibernate** – ORM für die Datenbankkommunikation
@@ -37,7 +37,7 @@ cd Backend
 ```
 
 ### 2. Umgebungsvariablen konfigurieren
-Datenbank- und Anwendungseinstellungen in application.properties und application.yml anpassen.
+Datenbank- und Anwendungseinstellungen in *application.properties* und *application.yml* anpassen.
 
 `src/main/resources/application.properties`:
 ```properties
@@ -88,20 +88,20 @@ docker-compose up --build
 ### Old Maps
 - `GET /oldmaps` - Alle alten Karten abrufen
 - `GET /oldmaps/{id}` - Eine alte Karte anhand der ID abrufen
-- `GET /oldmaps/{id}/map` -Die Karte zu einer alten Karte abrufen
-- `POST /oldmaps` - Eine alte Karte speichern
+- `GET /oldmaps/{id}/map` - Die Karte zu einer alten Karte abrufen
+- `POST /oldmaps` - Eine alte Karte erstellen
 - `PUT /oldmaps` - Eine alte Karte bearbeiten
 - `DELETE /oldmaps/{id}` - Eine alte Karte anhand der ID löschen
 
 ### Prompting
 - `POST /prompting/text` - Ein neues Bild aus Text generieren
-- `POST /prompting/inpainting` - Ein neues Bild per Inpainting generieren
+- `POST /prompting/inpainting` - Ein neues Bild per Inpainting und Text generieren
 
 ### Scenarios
 - `GET /scenarios` - Alle Szenarien abrufen
 - `GET /scenarios/{id}` - Ein Szenario anhand der ID abrufen
 - `GET /scenarios/{id}/map` - Die Karte zu einem Szenario abrufen
-- `POST /scenarios` - Ein Szenario speichern
+- `POST /scenarios` - Ein Szenario erstellen
 - `PUT /scenarios` - Ein Szenario bearbeiten
 - `DELETE /scenarios/{id}` - Ein Szenario anhand der ID löschen
 
@@ -115,55 +115,57 @@ http://localhost:8080/swagger-ui/index.html#/
 ```
 
 ## 🗃️ Datenstruktur
-Das Backend verwendet eine relationale Datenbank (PostgreSQL) zur Speicherung und Verwaltung der Daten. Die Datenstruktur ist auf eine effiziente Verwaltung historischer Karten, Szenarien und thematischer Welten ausgelegt und folgt den Prinzipien der Normalisierung zur Vermeidung redundanter Daten.
-### Hauptentitäten
+Das Backend setzt eine relationale PostgreSQL-Datenbank ein, um alte Karten und Szenarien strukturiert zu speichern und zu verwalten. Diese Daten bilden die Grundlage für die im Besucher- und Mitarbeiter-Frontend dargestellten Themenwelten. Das zugrunde liegende Datenmodell folgt dabei den Prinzipien der Datenbank-Normalisierung, um eine konsistente, wartbare und redundanzfreie Datenhaltung sicherzustellen.
+
+Die in der Datenbank gespeicherten Datensätze gliedern sich in zwei Kategorien:
+- **Alte Karten (OldMap)** sind reale, historische Karten von Olpe. Sie sind unbearbeitet und dienen als authentische Grundlage für historische Bezüge und Vergleiche.
+- **Szenarien (Scenario)** sind fiktive, alternative Darstellungen von Olpe. Sie entstehen aus Gedankenspielen und Überlegungen, wie die Stadt unter anderen historischen oder kulturellen Bedingungen ausgesehen haben könnte. Szenarien sind also Modifikationen auf Basis der alten Karten oder vollständig eigenständige Erfindungen.
+
+**Themenwelten (ThematicWorld)** wiederum sind die für Besucher sichtbaren Einheiten. Sie werden nicht als eigene Entität in der Datenbank gespeichert, sondern dynamisch aus den vorhandenen Szenarien und alten Karten zusammengeführt. Dabei greift das Backend auf alle als sichtbar markierten alten Karten und Szenarien zu und kombiniert diese zu einer einheitlichen Liste von Themenwelten. Um die Darstellung für die Besucher möglichst intuitiv zu gestalten, ist die Liste der Themenwelten so sortiert, dass die aktuelle Karte von Olpe an erster Stelle steht, gefolgt von allen Szenarien in alphabetischer Reihenfolge und anschließend alle alten Karten, ebenfalls alphabetisch sortiert.
+Durch diese einheitliche Zusammenführung von Karten und Szenarien in einer gemeinsamen Themenwelten-Liste müssen Besucher im Frontend nicht zwischen verschiedenen Bereichen oder Listen wechseln, sondern können alle relevanten Inhalte in übersichtlicher und gebündelter Form einsehen.
+
+### Datenbankmodell
+<img src="https://github.com/user-attachments/assets/57327479-1ce1-4916-bdbe-b74799075bd2" alt="Alt Text" width="600">
+
+### Aufbau der Objekte
 **OldMap**
-  - Repräsentiert historische Karten mit Metadaten und Bildinformationen.
-  - Felder:
-    - id (Integer, Primary Key) – Eindeutige Identifikation der Karte
-    - name (Varchar(255)) – Name der historischen Karte
-    - image (Bytea) – Bild der Karte im Binärformat
-    - date_of_map (Text) – Historisches Datum der Karte (z. B. Jahr oder Epoche)
-    - editable (Boolean) – Gibt an, ob die Karte bearbeitet werden kann
-    - visible (Boolean) – Gibt an, ob die Karte öffentlich sichtbar ist
-    - created_at (Timestamp) – Erstellungsdatum
-    - updated_at (Timestamp) – Datum der letzten Aktualisierung
+| Feldname     | Typ                  | Beschreibung                                    |
+|--------------|----------------------|-------------------------------------------------|
+| id           | Integer, Primary Key | Eindeutige Identifikation der Karte             |
+| name         | Varchar(255)         | Name der historischen Karte                     |
+| image        | Bytea                | Bild der Karte im Binärformat                   |
+| date_of_map  | Text                 | Historisches Datum (z. B. Jahr oder Epoche)     |
+| editable     | Boolean              | Gibt an, ob die Karte bearbeitet werden kann    |
+| visible      | Boolean              | Gibt an, ob die Karte öffentlich sichtbar ist   |
+| created_at   | Timestamp            | Erstellungsdatum                                |
+| updated_at   | Timestamp            | Datum der letzten Aktualisierung                |
 
 **Scenario**
-  - Beschreibt alternative historische Szenarien, die auf den alten Karten basieren.
-  - Felder:
-    - id (Integer, Primary Key) – Eindeutige Identifikation des Szenarios
-    - name (Varchar(255)) – Name des Szenarios
-    - image (Bytea) – Bild zum Szenario im Binärformat
-    - description (Text) – Detaillierte Beschreibung und historische Annahmen
-    - editable (Boolean) – Gibt an, ob das Szenario bearbeitet werden kann
-    - visible (Boolean) – Gibt an, ob das Szenario öffentlich sichtbar ist
-    - created_at (Timestamp) – Erstellungsdatum
-    - updated_at (Timestamp) – Datum der letzten Aktualisierung
-### Datenbankmodell
-<img src="https://github.com/user-attachments/assets/57327479-1ce1-4916-bdbe-b74799075bd2" alt="Alt Text" width="800">
+| Feldname     | Typ                  | Beschreibung                                      |
+|--------------|----------------------|---------------------------------------------------|
+| id           | Integer, Primary Key | Eindeutige Identifikation des Szenarios           |
+| name         | Varchar(255)         | Name des Szenarios                                |
+| image        | Bytea                | Bild zum Szenario im Binärformat                  |
+| description  | Text                 | Detaillierte Beschreibung und Kontext             |
+| editable     | Boolean              | Gibt an, ob das Szenario bearbeitet werden kann   |
+| visible      | Boolean              | Gibt an, ob das Szenario öffentlich sichtbar ist  |
+| created_at   | Timestamp            | Erstellungsdatum                                  |
+| updated_at   | Timestamp            | Datum der letzten Aktualisierung                  |
 
-### Weitere Entität
 **ThematicWorld**
-  - Beschreibt eine alte Karte oder ein Szenario, das für den Besucher sichtbar sein soll
-  - Felder:
-    - id (Integer, Primary Key) – Eindeutige Identifikation der Themenwelt
-    - name (Varchar(255)) – Name der Themenwelt
-    - description (Text) – Detaillierte Beschreibung und historische Annahmen
-    - image (Bytea) – Bild zur Themenwelt im Binärformat
-    - editable (Boolean) – Gibt an, ob die Themenwelt bearbeitet werden kann
-    - visible (Boolean) – Gibt an, ob die Themenwelt öffentlich sichtbar ist
+| Feldname     | Typ                  | Beschreibung                                        |
+|--------------|----------------------|-----------------------------------------------------|
+| id           | Integer, Primary Key | Eindeutige Identifikation der Themenwelt            |
+| name         | Varchar(255)         | Name der Themenwelt                                 |
+| description  | Text                 | Beschreibung mit historischen oder fiktiven Annahmen|
+| image        | Bytea                | Bild zur Themenwelt im Binärformat                  |
+| editable     | Boolean              | Gibt an, ob die Themenwelt bearbeitet werden kann   |
+| visible      | Boolean              | Gibt an, ob die Themenwelt öffentlich sichtbar ist  |
 
-**PromptingDTO**
-  - Repräsentiert den Prompt der aus den Daten des Frontends an die KI gesendet wird
-  - Felder
-    - promt (Text) - ...
-    - image (Text) - ...
-    - mask (Text) - ...
-    - realism (Interger) - ...
 
 ## 🧱 Projektstruktur
 Das Projekt folgt einem modularen Paket-Design, bei dem die Funktionalitäten in Domänen aufgeteilt und klar voneinander getrennt sind. Diese Struktur fördert Wartbarkeit, Erweiterbarkeit und eine klare Trennung der Verantwortlichkeiten.
+
 ### Übersicht über die Pakete
 Das Projekt ist in folgende Domänenpakete unterteilt:
 - oldmaps: Verwaltung von alten Karten
@@ -171,6 +173,7 @@ Das Projekt ist in folgende Domänenpakete unterteilt:
 - prompting: Verarbeitung von Texteingaben zur Bildgenerierung
 - thematicworlds: Verwaltung von thematischen Welten
 Jedes Paket enthält spezifische Komponenten, um den Clean Architecture-Ansatz und die Schichtenarchitektur (Layered Architecture) umzusetzen.
+
 ### Aufbau der Schichten
 Für jede Domäne (oldmaps, scenario, prompting, thematicworlds) sind die folgenden Schichten implementiert:
 
@@ -199,22 +202,19 @@ Für jede Domäne (oldmaps, scenario, prompting, thematicworlds) sind die folgen
   - Stellt die REST-API Endpunkte bereit.
   - Verarbeitet HTTP-Anfragen (GET, POST, PUT, DELETE) und gibt HTTP-Antworten zurück.
   - Delegiert die Geschäftslogik an den entsprechenden Service.
+
 ### Kommunikation zwischen den Schichten
-Der Controller empfängt die Anfragen und ruft die entsprechenden Methoden im Service auf.
+- Der Controller empfängt die Anfragen und ruft die entsprechenden Methoden im Service auf.
+- Der Service nutzt den Mapper, um die Daten zwischen DTO und Entity zu konvertieren und verwendet das Repository zur Datenbankkommunikation.
+- Das Repository führt die CRUD-Operationen aus und gibt die Daten an den Service zurück.
+- Der Service bereitet die Daten für den Controller auf, der sie als HTTP-Response zurückgibt.
 
-Der Service nutzt den Mapper, um die Daten zwischen DTO und Entity zu konvertieren und verwendet das Repository zur Datenbankkommunikation.
-
-Das Repository führt die CRUD-Operationen aus und gibt die Daten an den Service zurück.
-
-Der Service bereitet die Daten für den Controller auf, der sie als HTTP-Response zurückgibt.
 ### Vorteile und Begründung
-**Modularität**: Klare Trennung der Domänen (oldmaps, scenario, prompting, thematicworlds) erhöht die Übersichtlichkeit und fördert die Wartbarkeit.
+- **Modularität**: Klare Trennung der Domänen (oldmaps, scenario, prompting, thematicworlds) erhöht die Übersichtlichkeit und fördert die Wartbarkeit.
+- **Wiederverwendbarkeit und Testbarkeit**: Isolierte Geschäftslogik in den Services und wiederverwendbare Mapper erleichtern Unit-Tests.
+- **Erweiterbarkeit**: Neue Features können durch Hinzufügen von Klassen in den jeweiligen Domänenpaketen leicht integriert werden.
+- **Klarer Verantwortungsbereich**: Durch die Schichtenarchitektur bleibt der Code sauber und strukturiert.
 
-**Wiederverwendbarkeit und Testbarkeit**: Isolierte Geschäftslogik in den Services und wiederverwendbare Mapper erleichtern Unit-Tests.
-
-**Erweiterbarkeit**: Neue Features können durch Hinzufügen von Klassen in den jeweiligen Domänenpaketen leicht integriert werden.
-
-**Klarer Verantwortungsbereich**: Durch die Schichtenarchitektur bleibt der Code sauber und strukturiert.
 ### Verzeichnisstruktur
 ```text
 com.be.backend
