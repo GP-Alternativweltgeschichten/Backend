@@ -1,7 +1,7 @@
 # Spring Boot Backend
 
 ## 📌 Beschreibung
-Diese Anwendung bildet das Backend für das Projekt „Alternativweltgeschichten“ des Stadtmuseums Olpe und fungiert als zentrale Schnittstelle zur Verwaltung und Bereitstellung der Themenwelten, die in den Besucher- und Mitarbeiter-Frontends verwendet werden. Über RESTful APIs ermöglicht das Backend die strukturierte Verwaltung von alten Karten und Szenarien, die als Grundlage für die Generierung neuer Alternativweltgeschichten im Besucher-Frontend dienen. Darüber hinaus übernimmt das Backend die Kommunikation mit dem angebundenen KI-Server zur Bildgenerierung: Es empfängt die Nutzereingaben aus dem Besucher-Frontend, leitet sie an den KI-Server weiter und übermittelt das generierte Bild zurück an das Frontend.
+Diese Anwendung bildet das Backend für das Projekt „Alternativweltgeschichten“ des Stadtmuseums Olpe und fungiert als zentrale Schnittstelle zur Verwaltung und Bereitstellung der Themenwelten, die in den Besucher- und Mitarbeiter-Frontends verwendet werden. Über RESTful APIs ermöglicht das Backend die strukturierte Verwaltung von alten Karten und Szenarien, die als Grundlage für die Generierung neuer Alternativweltgeschichten im Besucher-Frontend dienen. Darüber hinaus übernimmt das Backend die Kommunikation mit dem angebundenen KI-Server zur Bildgenerierung: Es empfängt die Nutzereingaben aus dem Besucher-Frontend, leitet sie an den KI-Server weiter und übermittelt das generierte Bild zurück an das Frontend. Zusätzlich wird das für die Generierung im Besucher-Frontend verwendete KI-Modell gespeichert, um eine zentrale Steuerung zu ermöglichen.
 Technologisch basiert die Anwendung auf Spring Boot und verwendet eine PostgreSQL-Datenbank zur Speicherung und Verwaltung der Themenwelten. Durch die Docker-Fähigkeit ist ein flexibler und skalierbarer Betrieb möglich. Zudem steht eine Swagger UI für die Dokumentation und das Testen der API-Endpunkte bereit.
 Ziel dieser Anwendung ist es, eine zuverlässige, wartbare und erweiterbare Plattform zur Datenhaltung und Weiterverarbeitung zu bieten.
 
@@ -127,7 +127,7 @@ Durch diese einheitliche Zusammenführung von Karten und Szenarien in einer geme
 ### Datenbankmodell
 <img src="https://github.com/user-attachments/assets/57327479-1ce1-4916-bdbe-b74799075bd2" alt="Alt Text" width="600">
 
-### Aufbau der Objekte
+### Aufbau der Entitäten
 **OldMap**
 | Feldname     | Typ                  | Beschreibung                                    |
 |--------------|----------------------|-------------------------------------------------|
@@ -168,37 +168,38 @@ Das Projekt folgt einem modularen Paket-Design, bei dem die Funktionalitäten in
 
 ### Übersicht über die Pakete
 Das Projekt ist in folgende Domänenpakete unterteilt:
-- oldmaps: Verwaltung von alten Karten
-- scenario: Verwaltung von Szenarien
-- prompting: Verarbeitung von Texteingaben zur Bildgenerierung
-- thematicworlds: Verwaltung von thematischen Welten
-Jedes Paket enthält spezifische Komponenten, um den Clean Architecture-Ansatz und die Schichtenarchitektur (Layered Architecture) umzusetzen.
+- **oldmaps**: Verwaltung von alten Karten
+- **scenario**: Verwaltung von Szenarien
+- **prompting**: Weiterleitung der Benutzereingaben zur Bildgenerierung
+- **thematicworlds**: Verwaltung von thematischen Welten
+
+Jedes Paket enthält spezifische Komponenten, um den *Clean Architecture-Ansatz* und die *Schichtenarchitektur (Layered Architecture)* umzusetzen.
 
 ### Aufbau der Schichten
 Für jede Domäne (oldmaps, scenario, prompting, thematicworlds) sind die folgenden Schichten implementiert:
 
-**Entity** (OldMap, Scenario, ThematicWorld)
+**Entity** (OldMap, Scenario, (ThematicWorld)):
   - Repräsentiert die Datenbankstruktur und spiegelt die Tabellen wider.
   - Verwendet JPA-Annotationen zur Definition von Persistenz-Mapping.
   - Wird für die Kommunikation mit der Datenbank verwendet.
 
-**DTO** (OldMapDTO, ScenarioDTO, PromptingDTO)
+**DTO** (OldMapDTO, ScenarioDTO, PromptingDTO):
   - Definiert die Datenstruktur für Anfragen und Antworten der REST-API.
   - Verhindert direkte Kopplung der Entitäten an externe Schnittstellen.
 
-**Mapper** (OldMapMapper, ScenarioMapper)
+**Mapper** (OldMapMapper, ScenarioMapper):
   - Konvertiert zwischen Entity und DTO.
   - Verwendet MapStruct zur Generierung von Mapping-Code zur Compile-Zeit.
 
-**Repository** (OldMapRepo, ScenarioRepo)
+**Repository** (OldMapRepo, ScenarioRepo):
   - Schnittstelle zur Datenbankkommunikation mit Spring Data JPA.
   - Unterstützt CRUD-Operationen durch vordefinierte Methoden (findAll, findById, save, deleteById).
 
-**Service** (OldMapService, ScenarioService, PromptingService, ThematicWorldsService)
+**Service** (OldMapService, ScenarioService, PromptingService, ThematicWorldsService):
   - Enthält die Geschäftslogik der Anwendung.
   - Koordiniert die Kommunikation zwischen Repository, Mapper und Controller.
 
-**Controller** (OldMapController, ScenarioController, PromptingController, ThematicWorldsController)
+**Controller** (OldMapController, ScenarioController, PromptingController, ThematicWorldsController):
   - Stellt die REST-API Endpunkte bereit.
   - Verarbeitet HTTP-Anfragen (GET, POST, PUT, DELETE) und gibt HTTP-Antworten zurück.
   - Delegiert die Geschäftslogik an den entsprechenden Service.
