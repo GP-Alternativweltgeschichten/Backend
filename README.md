@@ -12,6 +12,8 @@ Ziel dieser Anwendung ist es, eine zuverlässige, wartbare und erweiterbare Plat
 - [API-Endpunkte](#-api-endpunkte)
 - [Datenstruktur](#%EF%B8%8F-datenstruktur)
 - [Projektstruktur](#-projektstruktur)
+- [Feature-Übersicht](#-feature-übersicht)
+- [Zukünftige Erweiterungen](#-zukünftige-erweiterungen)
 
 ## 🚀 Verwendete Technologien
 Dieses Projekt nutzt folgende Technologien und Frameworks:
@@ -246,7 +248,19 @@ com.be.backend
     └── ThematicWorldsController.java
 ```
 
-## ...
+## 📋 Feature-Übersicht
+| **Feature**                                           | **Beschreibung**                                                      
+|-------------------------------------------------------|---------------------------------------------------------------------|
+| **Verwaltung alter Karten (Old Maps)**                | Erstellen, Bearbeiten, Löschen, Anzeigen von historischen Karten.   | 
+| **Verwaltung von Szenarien (Scenarios)**              | Erstellen, Bearbeiten, Löschen, Anzeigen von fiktiven Szenarien.    | 
+| **Verwaltung von Themenwelten (ThematicWorlds)**      | Zusammenstellen und Anzeigen von Themenwelten aus sichtbaren alten Karten und Szenarien.   | 
+| **KI-Bildgenerierung (Prompting)**                    | Anbindung an den KI-Server zur Weiterleitung von Nutzer-Eingaben und Empfangen generierter Bilder.   | 
+| **Steuerung des KI-Modells (Prompting)**              | Abrufen und Setzen des im Besucher-Frontend zur Generierung verwendeten KI-Modells.   |
+
+## 📈 Zukünftige Erweiterungen
+- **Zugriffsbeschränkung und Rollenverwaltung**: Einführung eines Authentifizierungs- und Rollensystems, um den Zugriff auf bestimmte Funktionen zu steuern (z.B. Administratoren vs. Editoren). Damit kann die Bearbeitung oder Sichtbarkeit von Inhalten abhängig von Nutzerrollen beschränkt werden.
+- **Versionierung von Szenarien und alten Karten**: Implementierung einer Versionsverwaltung, die es ermöglicht, ältere Versionen von Szenarien und alten Karten einzusehen und Änderungen nachzuverfolgen (inkl. Historie).
+- **Erweiterte Filter- und Suchfunktion für API**: Implementierung zusätzlicher Abfragen für alte Karten und Szenarien, die es ermöglichen, z.B. nach bestimmten historischen Zeiträumen, Themen oder Stichwörtern zu suchen. 
 
 ---
 Happy Coding! 🚀
