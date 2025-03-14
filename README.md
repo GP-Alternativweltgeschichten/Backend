@@ -1,9 +1,9 @@
-# 🌍 Spring Boot Backend
+# Spring Boot Backend
 
 ## 📌 Beschreibung
-Dieses Anwendung dient als Backend für das Projekt Alternativweltgeschichten und bietet APIs zur Verwaltung historischer Karten, Szenarien und thematischer Welten. Zudem unterstützt es KI-basierte Bilderzeugung und Inpainting für historische Rekonstruktionen.
-
-Das Backend basiert auf Spring Boot und folgt bewährten Methoden für die Entwicklung von RESTful APIs. Es integriert eine PostgreSQL-Datenbank, unterstützt Docker-Deployment und enthält eine Swagger UI zur API-Dokumentation.
+Diese Anwendung bildet das Backend für das Projekt „Alternativweltgeschichten“ des Stadtmuseums Olpe und fungiert als zentrale Schnittstelle zur Verwaltung und Bereitstellung der Themenwelten, die in den Besucher- und Mitarbeiter-Frontends verwendet werden. Über RESTful APIs ermöglicht das Backend die strukturierte Verwaltung von alten Karten und Szenarien, die als Grundlage für die Generierung neuer Alternativweltgeschichten im Besucher-Frontend dienen. Darüber hinaus übernimmt das Backend die Kommunikation mit dem angebundenen KI-Server zur Bildgenerierung: Es empfängt die Nutzereingaben aus dem Besucher-Frontend, leitet sie an den KI-Server weiter und übermittelt das generierte Bild zurück an das Frontend.
+Technologisch basiert die Anwendung auf Spring Boot und verwendet eine PostgreSQL-Datenbank zur Speicherung und Verwaltung der Themenwelten. Durch die Docker-Fähigkeit ist ein flexibler und skalierbarer Betrieb möglich. Zudem steht eine Swagger UI für die Dokumentation und das Testen der API-Endpunkte bereit.
+Ziel dieser Anwendung ist es, eine zuverlässige, wartbare und erweiterbare Plattform zur Datenhaltung und Weiterverarbeitung zu bieten.
 
 ## 📖 Inhalt
 - [Verwendete Technologien](#-verwendete-technologien)
@@ -15,7 +15,7 @@ Das Backend basiert auf Spring Boot und folgt bewährten Methoden für die Entwi
 
 ## 🚀 Verwendete Technologien
 Dieses Projekt nutzt folgende Technologien und Frameworks:
-- **Java** (Version: 17)– Haupt programmiersprache
+- **Java** (Version: 17) – Haupt programmiersprache
 - **Spring Boot** (Version: 3.4) – Backend-Framework
 - **Spring Data JPA** – Datenbankzugriff
 - **Hibernate** – ORM für die Datenbankkommunikation
@@ -141,7 +141,8 @@ Das Backend verwendet eine relationale Datenbank (PostgreSQL) zur Speicherung un
     - created_at (Timestamp) – Erstellungsdatum
     - updated_at (Timestamp) – Datum der letzten Aktualisierung
 ### Datenbankmodell
-![postgres@localhost](https://github.com/user-attachments/assets/62e2cd6c-1138-4550-b51e-1e9608eab116)
+<img src="https://github.com/user-attachments/assets/57327479-1ce1-4916-bdbe-b74799075bd2" alt="Alt Text" width="800">
+
 ### Weitere Entität
 **ThematicWorld**
   - Beschreibt eine alte Karte oder ein Szenario, das für den Besucher sichtbar sein soll
