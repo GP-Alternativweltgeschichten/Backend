@@ -6,7 +6,7 @@ Technologisch basiert die Anwendung auf Spring Boot und verwendet eine PostgreSQ
 Ziel dieser Anwendung ist es, eine zuverlässige, wartbare und erweiterbare Plattform zur Datenhaltung und Weiterverarbeitung zu bieten.
 
 ## 📖 Inhalt
-- [Verwendete Technologien](#-verwendete-technologien)
+- [Verwendete Technologien](#%EF%B8%8F-verwendete-technologien)
 - [Voraussetzungen](#%EF%B8%8F-voraussetzungen)
 - [Installation und Setup](#-installation-und-setup)
 - [API-Endpunkte](#-api-endpunkte)
@@ -15,7 +15,7 @@ Ziel dieser Anwendung ist es, eine zuverlässige, wartbare und erweiterbare Plat
 - [Feature-Übersicht](#-feature-übersicht)
 - [Zukünftige Erweiterungen](#-zukünftige-erweiterungen)
 
-## 🚀 Verwendete Technologien
+## 🖥️ Verwendete Technologien
 Dieses Projekt nutzt folgende Technologien und Frameworks:
 - **Java** (Version: 17) – (Haupt)-Programmiersprache
 - **Spring Boot** (Version: 3.4) – Backend-Framework
