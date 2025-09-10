@@ -11,6 +11,4 @@ public class AiChatDTO {
     String prompt;
     String image;
     String mask;
-    int model;
-    int guidanceScale;
 }

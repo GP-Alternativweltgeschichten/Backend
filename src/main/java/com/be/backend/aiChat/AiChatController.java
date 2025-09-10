@@ -1,36 +1,25 @@
 package com.be.backend.aiChat;
 
-import com.be.backend.prompting.PromptingDTO;
-import com.be.backend.prompting.PromptingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 @RestController
-@RequestMapping("/prompting")
+@RequestMapping("/aiChat")
 @RequiredArgsConstructor
 @Validated
 public class AiChatController {
-    private final PromptingService promptingService;
+    private final AiChatService aiChatService;
 
     @PostMapping("/text")
-    public ResponseEntity<byte[]> getImageFromText(@RequestBody String text) {
-        return ResponseEntity.ok(promptingService.getImageFromText(text));
+    public ResponseEntity<String> getImageFromText(@RequestBody String text) {
+        return ResponseEntity.ok(aiChatService.getTextForChat(text));
     }
 
-    @PostMapping("/inpainting")
-    public ResponseEntity<byte[]> getImageFromTextAndImageAndMask(@RequestBody PromptingDTO request) {
-        return ResponseEntity.ok(promptingService.getImageFromInpaintInformation(request.prompt, request.image, request.mask, request.model, request.guidanceScale));
+    @PostMapping("/image")
+    public ResponseEntity<String> getImageFromTextAndImageAndMask(@RequestBody AiChatDTO request) {
+        return ResponseEntity.ok(aiChatService.getTextFromImageForChat(request.image, request.mask ));
     }
 
-    @GetMapping("/aiModel")
-    public ResponseEntity<Number> getAiModel() {
-        return ResponseEntity.ok(promptingService.getAiModel());
-    }
 
-    @PostMapping("/aiModel")
-    public ResponseEntity<Void> setAiModel(@RequestBody Number aiModel) {
-        promptingService.setAiModel(aiModel);
-        return ResponseEntity.ok().build();
-    }
 }
