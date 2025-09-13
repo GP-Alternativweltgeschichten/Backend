@@ -8,7 +8,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AiChatDTO {
-    String prompt;
+    String text;
     String image;
     String mask;
+    String conversationId;
 }

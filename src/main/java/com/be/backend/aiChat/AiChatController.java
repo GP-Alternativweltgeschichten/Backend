@@ -12,13 +12,13 @@ public class AiChatController {
     private final AiChatService aiChatService;
 
     @PostMapping("/text")
-    public ResponseEntity<String> getImageFromText(@RequestBody String text) {
-        return ResponseEntity.ok(aiChatService.getTextForChat(text));
+    public ResponseEntity<String> getTextFromTextForChat(@RequestBody AiChatDTO request) {
+        return ResponseEntity.ok(aiChatService.getTextForChat(request.text, request.conversationId));
     }
 
     @PostMapping("/image")
-    public ResponseEntity<String> getImageFromTextAndImageAndMask(@RequestBody AiChatDTO request) {
-        return ResponseEntity.ok(aiChatService.getTextFromImageForChat(request.image, request.mask ));
+    public ResponseEntity<String> getImageFromTextAndImageAndMask(@RequestBody AiChatDTO request ) {
+        return ResponseEntity.ok(aiChatService.getTextFromImageForChat(request.image, request.mask, request.conversationId));
     }
 
 

@@ -15,19 +15,19 @@ public class AiChatService {
 
 
 
-    public String getTextForChat(String text) {
+    public String getTextForChat(String text, String conversationId) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> request = new HttpEntity<>(text, headers);
-
+        String body = "{\"text\":\"" + text + "\",\"conversationId\":\"" + conversationId + "\"}";
+        HttpEntity<String> request = new HttpEntity<>(body, headers);
         ResponseEntity<String> response = restTemplate.postForEntity(uri + "/text/", request, String.class);
         return response.getBody();
     }
 
-    public String getTextFromImageForChat( String image, String mask) {
+    public String getTextFromImageForChat(String image, String mask, String conversationId) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        String body = "{\"image\":\"" + image + "\",\"mask\":\"" + mask + "\"}";
+        String body = "{\"image\":\"" + image + "\",\"mask\":\"" + mask + "\",\"conversationId\":\"" + conversationId + "\"}";
         HttpEntity<String> request = new HttpEntity<>(body, headers);
         ResponseEntity<String> response = restTemplate.exchange(
                 uri + "/MarkedImage/", HttpMethod.POST, request, String.class);
