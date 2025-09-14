@@ -1,5 +1,5 @@
 package com.be.backend.aiChat;
-
+import java.util.Base64;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
@@ -10,31 +10,62 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 @Slf4j
 public class AiChatService {
-    final String uri = "http://127.0.0.1:8000";
-    RestTemplate restTemplate = new RestTemplate();
+
+    private final String uri = "http://127.0.0.1:8000"; // Dein Python-Backend
+    private final RestTemplate restTemplate = new RestTemplate();
 
     // 0 = OlpeAI
     // 1 = ChatGPT
-    public Number aiModel = 0;
+    private Number aiModel = 0;
 
     public byte[] getImageFromText(String text) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> request = new HttpEntity<>(text, headers);
 
-        ResponseEntity<byte[]> response = restTemplate.postForEntity(uri + "/text/", request, byte[].class);
+        String body = "{\"prompt\":\"" + text + "\"}";
+        HttpEntity<String> request = new HttpEntity<>(body, headers);
+
+        ResponseEntity<byte[]> response = restTemplate.postForEntity(
+                uri + "/text/", request, byte[].class);
         return response.getBody();
     }
 
-    public byte[] getImageFromInpaintInformation(String text, String image, String mask, int model, int guidanceScale) {
+    public byte[] getImageFromInpaintInformation(
+            String text,
+            String imageBase64,
+            String maskBase64,
+            int model,
+            int guidanceScale
+    ) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        String body = "{\"prompt\":\"" + text + "\",\"image\":\"" + image + "\",\"mask\":\"" + mask + "\",\"model\":\"" + model + "\",\"guidance_scale\":\"" + guidanceScale + "\"}";
+
+        // Strings direkt weiterschicken (Python kann auch Base64 lesen)
+        String body = String.format(
+                "{\"prompt\":\"%s\",\"image\":\"%s\",\"mask\":\"%s\",\"model\":%d,\"guidance_scale\":%d}",
+                text,
+                imageBase64 != null ? imageBase64 : "",
+                maskBase64 != null ? maskBase64 : "",
+                model,
+                guidanceScale
+        );
 
         HttpEntity<String> request = new HttpEntity<>(body, headers);
 
         ResponseEntity<byte[]> response = restTemplate.exchange(
                 uri + "/inpainting/", HttpMethod.POST, request, byte[].class);
+        return response.getBody();
+    }
+
+    public String forwardUnitySelection(AiChatDTO unityDTO) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<AiChatDTO> request = new HttpEntity<>(unityDTO, headers);
+
+        ResponseEntity<String> response = restTemplate.postForEntity(
+                uri + "/generate", request, String.class);
+
         return response.getBody();
     }
 
@@ -44,21 +75,6 @@ public class AiChatService {
 
     public void setAiModel(Number aiModel) {
         this.aiModel = aiModel;
-        System.out.println("AI Model set to " + aiModel);
-    }
-
-    // ------------------------
-    // Unity Forwarding
-    // ------------------------
-    public String forwardUnitySelection(AiChatDTO unityDTO) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        HttpEntity<AiChatDTO> request = new HttpEntity<>(unityDTO, headers);
-        ResponseEntity<String> response = restTemplate.postForEntity(uri + "/generate", request, String.class);
-
-        log.info("Forwarding Unity selection to LLM backend at {}", uri + "/generate");
-
-        return response.getBody();
+        log.info("AI Model set to {}", aiModel);
     }
 }

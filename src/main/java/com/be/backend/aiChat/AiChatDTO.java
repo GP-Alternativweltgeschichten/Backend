@@ -7,21 +7,17 @@ import lombok.Setter;
 
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class AiChatDTO {
-
-    // ===== Alte Felder (für Text & Inpainting) =====
     private String prompt;
-    private String image;       // Base64 Screenshot oder Inpainting-Input
-    private String mask;
-    private int model;
-    private int guidanceScale;
-
-    // ===== Neue Felder (für Unity-Auswahl) =====
-    private int count;                       // Anzahl aller Gebäude
-    private List<AssetInfo> assets;          // Kategorien + Namen
-    private List<String> uniqueBuildings;    // Besondere Gebäude
+    private String image;                 // Base64-kodiertes Bild von Unity
+    private String mask;                  // Optional: Base64-kodierte Maske
+    private int buildingCount;            // Anzahl aller Gebäude
+    private List<String> categories;      // Kategorien aller Assets
+    private List<String> uniqueBuildings; // Unique Namen besonderer Gebäude
+    private int model;                    // Modell-Auswahl (0 = OlpeAI, 1 = ChatGPT)
+    private int guidanceScale;            // Guidance-Scale Wert
 }
