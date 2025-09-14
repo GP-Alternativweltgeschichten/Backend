@@ -13,8 +13,8 @@ public class AiChatService {
     final String uri = "http://127.0.0.1:8000";
     RestTemplate restTemplate = new RestTemplate();
 
-    //    0 = OlpeAI
-//    1 = ChatGPT
+    // 0 = OlpeAI
+    // 1 = ChatGPT
     public Number aiModel = 0;
 
     public byte[] getImageFromText(String text) {
@@ -33,7 +33,6 @@ public class AiChatService {
 
         HttpEntity<String> request = new HttpEntity<>(body, headers);
 
-        RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<byte[]> response = restTemplate.exchange(
                 uri + "/inpainting/", HttpMethod.POST, request, byte[].class);
         return response.getBody();
@@ -46,5 +45,20 @@ public class AiChatService {
     public void setAiModel(Number aiModel) {
         this.aiModel = aiModel;
         System.out.println("AI Model set to " + aiModel);
+    }
+
+    // ------------------------
+    // Unity Forwarding
+    // ------------------------
+    public String forwardUnitySelection(AiChatDTO unityDTO) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<AiChatDTO> request = new HttpEntity<>(unityDTO, headers);
+        ResponseEntity<String> response = restTemplate.postForEntity(uri + "/generate", request, String.class);
+
+        log.info("Forwarding Unity selection to LLM backend at {}", uri + "/generate");
+
+        return response.getBody();
     }
 }
