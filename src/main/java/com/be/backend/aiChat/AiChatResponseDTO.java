@@ -7,10 +7,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class AiChatDTO {
-    String text;
-    String image;
-    String mask;
-    String conversationId;
+public class AiChatResponseDTO {
+    private String responseText;
+    private String conversationId;
 }
-

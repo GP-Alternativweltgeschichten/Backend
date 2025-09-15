@@ -1,4 +1,4 @@
-package com.be.backend.aiChat;
+package com.be.backend.aiChatUnity;
 
 public class AssetInfo {
     private String name;      // Objektname

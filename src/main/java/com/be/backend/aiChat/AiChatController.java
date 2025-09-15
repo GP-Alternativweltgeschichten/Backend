@@ -1,47 +1,32 @@
 package com.be.backend.aiChat;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import java.util.Base64;
 @RestController
 @RequestMapping("/aiChat")
 @RequiredArgsConstructor
 @Validated
 public class AiChatController {
-
     private final AiChatService aiChatService;
 
-    @PostMapping("/text")
-    public ResponseEntity<byte[]> getImageFromText(@RequestBody String text) {
-        return ResponseEntity.ok(aiChatService.getImageFromText(text));
+    @PostMapping(value = "/text",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AiChatResponseDTO> getTextFromTextForChat(@RequestBody AiChatDTO request) {
+        String answer = aiChatService.getTextForChat(request.getText(), request.getConversationId());
+        AiChatResponseDTO out = new AiChatResponseDTO(answer,request.getConversationId());
+        return ResponseEntity.ok(aiChatService.getTextForChat(request.text, request.conversationId));
     }
 
-    @PostMapping("/inpainting")
-    public ResponseEntity<byte[]> getImageFromTextAndImageAndMask(@RequestBody AiChatDTO request) {
-        return ResponseEntity.ok(aiChatService.getImageFromInpaintInformation(
-                request.getPrompt(),
-                request.getImage(),
-                request.getMask(),
-                request.getModel(),
-                request.getGuidanceScale()
-        ));
-    }
-    @GetMapping("/aiModel")
-    public ResponseEntity<Number> getAiModel() {
-        return ResponseEntity.ok(aiChatService.getAiModel());
+    @PostMapping(value = "/image",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getImageFromTextAndImageAndMask(@RequestBody AiChatDTO request ) {
+        return ResponseEntity.ok(aiChatService.getTextFromImageForChat(request.image, request.mask, request.conversationId));
     }
 
-    @PostMapping("/aiModel")
-    public ResponseEntity<Void> setAiModel(@RequestBody Number aiModel) {
-        aiChatService.setAiModel(aiModel);
-        return ResponseEntity.ok().build();
-    }
 
-    @PostMapping("/unity")
-    public ResponseEntity<String> receiveJsonAndImage(@RequestBody AiChatDTO dto) {
-        String response = aiChatService.forwardUnitySelection(dto);
-        return ResponseEntity.ok(response);
-    }
 }
