@@ -15,7 +15,7 @@ public class AiChatService {
 
 
 
-    public String getTextForChat(String text, String conversationId) {
+    public String getTextForChat(String text, Integer conversationId) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         String body = "{\"text\":\"" + text + "\",\"conversationId\":\"" + conversationId + "\"}";
@@ -24,7 +24,7 @@ public class AiChatService {
         return response.getBody();
     }
 
-    public String getTextFromImageForChat(String image, String mask, String conversationId) {
+    public String getTextFromImageForChat(String image, String mask, Integer conversationId) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         String body = "{\"image\":\"" + image + "\",\"mask\":\"" + mask + "\",\"conversationId\":\"" + conversationId + "\"}";

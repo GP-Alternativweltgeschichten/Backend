@@ -11,6 +11,6 @@ public class AiChatDTO {
     String text;
     String image;
     String mask;
-    String conversationId;
+    Integer conversationId;
 }
 
