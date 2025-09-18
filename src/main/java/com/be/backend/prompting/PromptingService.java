@@ -16,7 +16,7 @@ public class PromptingService {
 
 //    0 = OlpeAI
 //    1 = ChatGPT
-    public Number aiModel = 0;
+    public Number aiModel = 1;
 
     public byte[] getImageFromText(String text) {
         HttpHeaders headers = new HttpHeaders();

@@ -25,13 +25,13 @@ public class AiChatService {
         return response.getBody();
     }
 
-    public String getTextFromImageForChat(String image, String mask, Integer conversationId) {
+    public String getTextFromImageForChat(String image, String mask, int conversationId) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        String body = "{\"image\":\"" + image + "\",\"mask\":\"" + mask + "\",\"conversationId\":\"" + conversationId + "\"}";
+        String body = "{\"image\":\"" + image + "\",\"mask\":\"" + mask + "\",\"conversationId\":" + conversationId + "}";
         HttpEntity<String> request = new HttpEntity<>(body, headers);
-        ResponseEntity<String> response = restTemplate.exchange(
-                uri + "/MarkedImage/", HttpMethod.POST, request, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity(uri + "/text", request, String.class);
+        System.out.println(response.getBody() + " = getTextFromImageForChat output");
         return response.getBody();
     }
 
